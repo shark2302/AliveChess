@@ -93,8 +93,8 @@ public class GameManager : MonoBehaviour
 
     private void SpawnKing()
     {
-        var king = Instantiate(KingPrefab, new Vector3(transform.position.x + (Random.Range(0, 25) * 11),
-            transform.position.y + (Random.Range(0, 25) * 11)), Quaternion.identity);
+        var king = Instantiate(KingPrefab, new Vector3(transform.position.x + (Random.Range(0, 6) * 11),
+            transform.position.y + (Random.Range(0, 6) * 11)), Quaternion.identity);
         var movement = king.GetComponent<Player>();
         if (movement != null)
         {

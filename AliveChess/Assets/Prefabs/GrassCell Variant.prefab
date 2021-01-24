@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 3306517573193572588, guid: 4934b50be64740144b961c48ad8c3d1c,
         type: 3}
       propertyPath: SlowEffect
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3306517573193572591, guid: 4934b50be64740144b961c48ad8c3d1c,
         type: 3}
