@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IPunObservable
 {
 
     public Action<int> TowerHoldedEvent;
@@ -26,7 +27,7 @@ public class Player : MonoBehaviour
         TowerHoldedEvent = i => { };
     }
 
-    public void OnClicked(Vector2 pos)
+    public void OnCellClicked(Vector2 pos)
     {
         if (!_isMoving && Vector2.Distance(transform.position, pos) <= MaxDistanceForMove)
         {
@@ -62,5 +63,16 @@ public class Player : MonoBehaviour
             TowerHoldedEvent?.Invoke(_holdedTowers.Count);
         }
     }
-    
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+        }
+        else
+        {
+            transform.position = (Vector3) stream.ReceiveNext();
+        }
+    }
 }

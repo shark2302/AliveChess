@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 3306517573193572591}
   - component: {fileID: 3306517573193572588}
   - component: {fileID: 4544963488993317856}
+  - component: {fileID: 2121308642669479149}
   m_Layer: 0
-  m_Name: CommonCell
+  m_Name: Cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,7 +95,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1de8fed31fa17049ab05602f4cac863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlowEffect: 0
+  SpriteRenderer: {fileID: 3306517573193572591}
+  CommonCellImage: {fileID: 21300000, guid: 675cb6411f36989469f42a1a69297d71, type: 3}
+  GrassCellImage: {fileID: 21300000, guid: 770fe947d1f97e942855e014cf644307, type: 3}
+  WaterCellImage: {fileID: 21300000, guid: 11f3f024aa614454c8b24f3cbb2007f6, type: 3}
+  CommonCellSlowEffect: 0
+  GrassCellSlowEffect: 3
+  WaterCellSlowEffect: 5
 --- !u!61 &4544963488993317856
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -121,3 +128,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.24, y: 10.24}
   m_EdgeRadius: 0
+--- !u!114 &2121308642669479149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3306517573193572584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
