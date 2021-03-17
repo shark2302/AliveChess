@@ -54,16 +54,6 @@ public class Player : MonoBehaviour, IPunObservable
         }
     }
 
-    public void OnTowerClicked(Tower tower)
-    {
-        if (!_holdedTowers.Contains(tower) && Vector2.Distance(transform.position, tower.gameObject.transform.position) <= MaxDistancetoHold)
-        {
-            _holdedTowers.Add(tower);
-            tower.GetComponent<SpriteRenderer>().color = Color.red;
-            TowerHoldedEvent?.Invoke(_holdedTowers.Count);
-        }
-    }
-
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)

@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
     
     public GameObject HUD;
     
-    public GameObject TowerPrefab;
+    public string TowerPrefab;
 
     public GameObject CellPrefab;
 
@@ -139,7 +139,6 @@ public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
         TowerCountText.text = string.Empty;
         PlayerRankText.text = "Ранк игрока : " + PlayerPrefs.GetInt("PlayerRank");
         SpawnCells();
-        SpawnTowers();
     }
     
     public void CreateGame(string room)
@@ -168,10 +167,6 @@ public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
 
     private void OnDisable()
     {
-        foreach (var tower in _towers)
-        {
-            UnsubscribeKingOnTowerClick(tower);
-        }
         DestroyAll();
     }
 
@@ -210,7 +205,6 @@ public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
     {
         var king = PhotonNetwork.Instantiate(KingPrefab, new Vector3(transform.position.x + (Random.Range(0, 6) * 11),
             transform.position.y + (Random.Range(0, 6) * 11)), Quaternion.identity);
-        Debug.Log(king);
         _localPlayer = king.GetComponent<Player>();
         if (_localPlayer != null)
         {
@@ -219,70 +213,19 @@ public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
             _localPlayer.TowerHoldedEvent += i =>
             {
                 TowerCountText.text = "Захвачено башен : " + i;
-                if (i == TowerCount)
-                {
-                    RankUp();
-                }
             };
+            
             foreach (var cell in _cells)
             {
                 cell.GetComponent<Cell>().ClickEvent += _localPlayer.OnCellClicked;
             }
-
-        }
-    }
-
-    private void SpawnTowers()
-    {
-        var xCell = Random.Range(2, 7);
-        var yCell = Random.Range(2, 7);
-        var tCount = TowerCount;
-        while (tCount > 0)
-        {
-            var go = Instantiate(TowerPrefab, new Vector3(xCell * 11 + 3, yCell * 11 - 2), Quaternion.identity);
+            var go = PhotonNetwork.Instantiate(TowerPrefab, _localPlayer.transform.position + Vector3.right, Quaternion.identity);
             var tower = go.GetComponent<Tower>(); 
-            _towers.Add(tower);
-            var rand = Random.Range(0, 2);
-            switch (rand)
-            {
-                case 0:
-                    xCell += Random.Range(2,7);
-                    break;
-                case 1:
-                    yCell += Random.Range(2, 7);
-                    break;
-                case 2:
-                    xCell += Random.Range(2, 7);
-                    yCell += Random.Range(2, 7);
-                    break;
-            }
-            tCount--;
+            tower.SetOwnerID(PhotonNetwork.LocalPlayer.UserId);
         }
     }
-
-    public void RankUp()
-    {
-        PlayerPrefs.SetInt("PlayerRank", PlayerPrefs.GetInt("PlayerRank") + 1);
-        OnDisable();
-        OnEnable(); 
-    }
     
-
-    private void SubscribeKingOnTowerClick(Tower tower)
-    {
-        foreach (var king in _players)
-        {
-            tower.TowerClickEvent += king.OnTowerClicked;
-        }    
-    }
     
-    private void UnsubscribeKingOnTowerClick(Tower tower)
-    {
-        foreach (var king in _players)
-        {
-            tower.TowerClickEvent -= king.OnTowerClicked;
-        }    
-    }
 
     private void DestroyAll()
     {

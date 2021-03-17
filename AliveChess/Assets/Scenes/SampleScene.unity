@@ -688,12 +688,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameMenuView: {fileID: 1993616053}
   HUD: {fileID: 379809491}
-  TowerPrefab: {fileID: 3098647099223641131, guid: 7e74dc3618a0ec047873268f9901c8e9,
+  TowerPrefab: Prefabs/Tower
+  CellPrefab: {fileID: 3306517573193572584, guid: 4934b50be64740144b961c48ad8c3d1c,
     type: 3}
-  CellPrefabs:
-  - Prefabs/CommonCell
-  - Prefabs/GrassCell
-  - Prefabs/WaterCell
   KingPrefab: Prefabs/King
   TowerCountText: {fileID: 592063462}
   PlayerRankText: {fileID: 1898027599}
@@ -933,7 +930,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.05740741, y: 0.93000007}
   m_AnchorMax: {x: 0.41300002, y: 0.96000004}
-  m_AnchoredPosition: {x: -3, y: -1}
+  m_AnchoredPosition: {x: -2.9999695, y: -1}
   m_SizeDelta: {x: -0.30000305, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1898027599

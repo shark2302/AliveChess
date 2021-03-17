@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 public class Cell : MonoBehaviour
@@ -100,9 +101,10 @@ public class Cell : MonoBehaviour
     {
         ClickEvent = vector2 => {};
     }
-    
+
     private void OnMouseDown()
     {
+       // if(!EventSystem.current.IsPointerOverGameObject())
         ClickEvent.Invoke(transform.position);
     }
     

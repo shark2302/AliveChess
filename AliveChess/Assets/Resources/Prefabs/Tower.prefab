@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3098647099223641126}
   - component: {fileID: 3098647099223641129}
   - component: {fileID: 3098647099223641128}
+  - component: {fileID: 7773640467321646300}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -94,6 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51904b0ad6a4f76419409caaa120a369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpriteRenderer: {fileID: 3098647099223641126}
+  TowerInfoPopup: {fileID: 3029810856478081885, guid: 808cf3c75ed14bc4cb16c7c44fd7e2f7,
+    type: 3}
+  photonView: {fileID: 7773640467321646300}
 --- !u!61 &3098647099223641128
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -120,3 +125,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.052617, y: 14.19}
   m_EdgeRadius: 0
+--- !u!114 &7773640467321646300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3098647099223641131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 3098647099223641129}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
