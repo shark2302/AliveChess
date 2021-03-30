@@ -11,7 +11,9 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
 {
-    
+    public GameProxy GameProxy;
+
+    public Canvas Canvas;
     public event Action<bool> RoomJoinEvent;
 
     public GameObject GameMenuView;
@@ -33,6 +35,10 @@ public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
     public int TowerCount;
 
     public FollowCamera Camera;
+
+    public GameObject BattleAgreementPopup;
+
+    private PhotonView _photonView;
     
     private List<Player> _players;
     
@@ -41,6 +47,12 @@ public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
     private List<Tower> _towers;
     private Player _localPlayer;
     private bool _mapCreated = false;
+
+    private void Awake()
+    {
+        GameProxy.GameManager = this;
+    }
+
     private void OnConnectedToServer()
     {
         Debug.Log("OnConnctedToServer");
@@ -48,6 +60,7 @@ public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
 
     private void Start()
     {
+        _photonView = GetComponent<PhotonView>();
         PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.GameVersion = "1";
 
@@ -67,8 +80,6 @@ public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
     public override void OnConnectedToMaster()
     {
         Debug.Log("OnConnectedToMaster");
-        
-        
     }
     
     public override void OnJoinedRoom()
@@ -143,7 +154,7 @@ public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
     
     public void CreateGame(string room)
     {
-        PhotonNetwork.CreateRoom(room);
+        PhotonNetwork.CreateRoom(room, new RoomOptions(){PublishUserId = true});
     }
     
     public void FindRandomGame()
@@ -265,4 +276,26 @@ public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
         }
         Debug.Log(_cells.Count + " was recieved");
     }
+
+    public void SendInviteToPlayer(string fromId, string toId)
+    {
+        Photon.Realtime.Player target = null;
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            if (player.UserId == toId)
+            {
+                target = player;
+            }
+        }
+        if(target != null)
+            _photonView.RPC("Invite",target, fromId);
+    }
+
+    [PunRPC]
+    private void Invite(string invitorId)
+    {
+        var win = Instantiate(BattleAgreementPopup, Canvas.transform);
+        win.GetComponent<BattleAgreementPopup>().SetData(invitorId);
+    }
+    
 }

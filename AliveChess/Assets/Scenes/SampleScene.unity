@@ -686,6 +686,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d408c907a52a71240a528c713ce7f333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameProxy: {fileID: 11400000, guid: e2d12b794db5f1643ba031297162649e, type: 2}
+  Canvas: {fileID: 1894973664}
   GameMenuView: {fileID: 1993616053}
   HUD: {fileID: 379809491}
   TowerPrefab: Prefabs/Tower
@@ -697,6 +699,7 @@ MonoBehaviour:
   DeskSize: 10
   TowerCount: 4
   Camera: {fileID: 519420030}
+  BattleAgreementPopup: {fileID: 0}
 --- !u!114 &1519854281
 MonoBehaviour:
   m_ObjectHideFlags: 0

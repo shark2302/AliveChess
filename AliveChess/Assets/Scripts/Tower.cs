@@ -8,6 +8,8 @@ using WebSocketSharp;
 public class Tower : MonoBehaviour, IPunObservable
 {
 
+	public GameProxy GameProxy;
+	
 	public SpriteRenderer SpriteRenderer;
 
 	public GameObject TowerInfoPopup;
@@ -28,11 +30,11 @@ public class Tower : MonoBehaviour, IPunObservable
 
 	private void OnMouseDown()
 	{
-		if (!photonView.IsMine)
+		if (_ownerID != PhotonNetwork.LocalPlayer.UserId) 
 		{
 			Debug.Log(_ownerID);
-			var win = Instantiate(TowerInfoPopup, FindObjectOfType<Canvas>().transform);
-			win.GetComponent<TowerInfoPopup>().SetData(_ownerID);
+			var win = Instantiate(TowerInfoPopup, GameProxy.GameManager.Canvas.transform);
+			win.GetComponent<TowerInfoPopup>().SetData(_ownerID, PhotonNetwork.LocalPlayer.UserId);
 		}
 	}
 

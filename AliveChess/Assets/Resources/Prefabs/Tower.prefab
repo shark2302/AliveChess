@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51904b0ad6a4f76419409caaa120a369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameProxy: {fileID: 11400000, guid: e2d12b794db5f1643ba031297162649e, type: 2}
   SpriteRenderer: {fileID: 3098647099223641126}
   TowerInfoPopup: {fileID: 3029810856478081885, guid: 808cf3c75ed14bc4cb16c7c44fd7e2f7,
     type: 3}
