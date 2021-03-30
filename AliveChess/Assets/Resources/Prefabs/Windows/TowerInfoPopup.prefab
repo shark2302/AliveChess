@@ -247,6 +247,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameProxy: {fileID: 11400000, guid: e2d12b794db5f1643ba031297162649e, type: 2}
   NicknameText: {fileID: 3029810855872298459}
+  BattleButton: {fileID: 5710604312378833056}
+  CloseButton: {fileID: 3029810856646750360}
 --- !u!1 &3029810856646750366
 GameObject:
   m_ObjectHideFlags: 0

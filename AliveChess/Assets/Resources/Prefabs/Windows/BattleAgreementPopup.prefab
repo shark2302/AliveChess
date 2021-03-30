@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd17858045910b343a0246cefd71737d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameProxy: {fileID: 11400000, guid: e2d12b794db5f1643ba031297162649e, type: 2}
   InfoText: {fileID: 5239672812722630934}
 --- !u!1 &5239672812722631329
 GameObject:
@@ -443,8 +444,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OnBattleButtonClick
+      - m_Target: {fileID: 708093681999399620}
+        m_MethodName: OnDeclineButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -572,8 +573,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OnCloseButtonClick
+      - m_Target: {fileID: 708093681999399620}
+        m_MethodName: OnAgreeButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

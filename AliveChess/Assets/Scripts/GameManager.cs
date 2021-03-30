@@ -277,16 +277,23 @@ public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
         Debug.Log(_cells.Count + " was recieved");
     }
 
-    public void SendInviteToPlayer(string fromId, string toId)
+    private Photon.Realtime.Player FindPLayerByUserId(string userId)
     {
-        Photon.Realtime.Player target = null;
+        Photon.Realtime.Player result = null;
         foreach (var player in PhotonNetwork.PlayerList)
         {
-            if (player.UserId == toId)
+            if (player.UserId == userId)
             {
-                target = player;
+                result = player;
             }
         }
+
+        return result;
+    }
+
+    public void SendInviteToPlayer(string fromId, string toId)
+    {
+        var target = FindPLayerByUserId(toId);
         if(target != null)
             _photonView.RPC("Invite",target, fromId);
     }
@@ -296,6 +303,21 @@ public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
     {
         var win = Instantiate(BattleAgreementPopup, Canvas.transform);
         win.GetComponent<BattleAgreementPopup>().SetData(invitorId);
+    }
+
+    public void SendAnswerToInvitor(string invitorId, bool agreement)
+    {
+        var target = FindPLayerByUserId(invitorId);
+        if (target != null)
+        {
+            _photonView.RPC("SendAnswer", target, agreement);
+        }
+    }
+
+    [PunRPC]
+    private void SendAnswer(bool agreement)
+    {
+        Debug.LogError("Player answe : " + agreement);
     }
     
 }

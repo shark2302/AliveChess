@@ -7,6 +7,8 @@ public class TowerInfoPopup : MonoBehaviour
 {
 	public GameProxy GameProxy;
 	public Text NicknameText;
+	public Button BattleButton;
+	public Button CloseButton;
 	private string _playerId;
 	private string _yourId;
 	
@@ -20,6 +22,9 @@ public class TowerInfoPopup : MonoBehaviour
 	public void OnBattleButtonClick()
 	{
 		GameProxy.GameManager.SendInviteToPlayer(_yourId, _playerId);
+		BattleButton.gameObject.SetActive(false);
+		CloseButton.gameObject.SetActive(false);
+		NicknameText.text = "Ожидание игрока...";
 	}
 
 	public void OnCloseButtonClick()
