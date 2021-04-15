@@ -11,6 +11,9 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
 {
+
+    public Action AnswerEvent;
+    
     public GameProxy GameProxy;
 
     public Canvas Canvas;
@@ -37,6 +40,8 @@ public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
     public FollowCamera Camera;
 
     public GameObject BattleAgreementPopup;
+
+    public GameObject ChessWindow;
 
     private PhotonView _photonView;
     
@@ -317,7 +322,14 @@ public class GameManager : MonoBehaviourPunCallbacks , IOnEventCallback
     [PunRPC]
     private void SendAnswer(bool agreement)
     {
-        Debug.LogError("Player answe : " + agreement);
+        if (agreement)
+        {
+            var win = Instantiate(ChessWindow, GameProxy.GameManager.Canvas.transform);
+        }
+        else
+        {
+            Debug.Log("Player decline your invite");
+        }
+        AnswerEvent?.Invoke();
     }
-    
 }

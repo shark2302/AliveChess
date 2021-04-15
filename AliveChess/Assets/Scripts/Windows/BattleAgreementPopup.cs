@@ -8,6 +8,7 @@ public class BattleAgreementPopup : MonoBehaviour
 
 	public GameProxy GameProxy;
 	public Text InfoText;
+	public GameObject ChessWindow;
     private string _invitorId;
 
     public void SetData(string invitorId)
@@ -25,6 +26,7 @@ public class BattleAgreementPopup : MonoBehaviour
     public void OnAgreeButton()
     {
 	    GameProxy.GameManager.SendAnswerToInvitor(_invitorId, true);
+	    var win = Instantiate(ChessWindow, GameProxy.GameManager.Canvas.transform);
 	    Destroy(gameObject);
     }
 }

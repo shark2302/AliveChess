@@ -91,6 +91,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameProxy: {fileID: 11400000, guid: e2d12b794db5f1643ba031297162649e, type: 2}
   InfoText: {fileID: 5239672812722630934}
+  ChessWindow: {fileID: 879208328963112759, guid: 346c7f981b005c748b2c9a7edf630f91,
+    type: 3}
 --- !u!1 &5239672812722631329
 GameObject:
   m_ObjectHideFlags: 0

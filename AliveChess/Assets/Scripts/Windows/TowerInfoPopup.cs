@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +20,11 @@ public class TowerInfoPopup : MonoBehaviour
 		_yourId = yourId;
 	}
 
+	private void OnEnable()
+	{
+		GameProxy.GameManager.AnswerEvent += () => Destroy(gameObject);
+	}
+
 	public void OnBattleButtonClick()
 	{
 		GameProxy.GameManager.SendInviteToPlayer(_yourId, _playerId);
@@ -30,6 +36,11 @@ public class TowerInfoPopup : MonoBehaviour
 	public void OnCloseButtonClick()
 	{
 		Destroy(gameObject);
+	}
+	
+	private void OnDisable()
+	{
+		GameProxy.GameManager.AnswerEvent -= () => Destroy(gameObject);
 	}
 }
 
